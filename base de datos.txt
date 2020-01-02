@@ -1,0 +1,100 @@
+cd/
+cd xampp
+C:\xampp>
+cd bin
+mysql -h localhost -u root -p
+-------------------------------------------------------------------
+mysql> create database practica5;
+
+mysql> use practica5;
+Database changed
+mysql> create table alumnos(
+     idAlumnos int auto_increment,
+     matricula varchar(45),
+     grupo varchar(45),
+     nombre varchar(45),
+     aPaterno varchar(45),
+     aMaterno varchar(45),
+     direccion varchar(45),
+     telefono int,
+     email varchar(45),
+     fechaNacimiento date,
+     sexo varchar(45),
+    primary key(idAlumnos));
+Query OK, 0 rows affected (0.36 sec)
+---------------------------------dr------
+mysql> create table Cursos(
+     idCursos int auto_increment,
+     nombres varchar(45),
+     descripcion varchar(45),
+     primary key(idCursos));
+Query OK, 0 rows affected (0.38 sec)
+----------------------------------------
+mysql> create table Asignaturas(
+     idAsignaturas int auto_increment,
+     nombre varchar(45),
+     descripcion varchar(45),
+     primary key(idAsignaturas));
+Query OK, 0 rows affected (0.26 sec)
+---------------------------------------------
+mysql> create table Profesores(
+     idProfesores int auto_increment,
+     nombre varchar(45),
+     aPaterno varchar(45),
+     aMaterno varchar(45),
+     direccion varchar(45),
+     telefono int,
+     email varchar(45),
+     sexo varchar(45),
+     titulo varchar(45),
+     cedula int,
+     primary key(idProfesores));
+Query OK, 0 rows affected (0.48 sec)
+---------------------------------------------
+mysql> create table Respuestas(
+     idRespuestas int auto_increment,
+     respuestaA varchar(45),
+     respuestaB varchar(45),
+     respuestaC varchar(45),
+     primary key(idRespuestas));
+Query OK, 0 rows affected (0.25 sec)
+-------------------------------------------
+mysql> create table examenes(
+     idExamenes int auto_increment,
+     fecha date,
+     numPreguntas int,
+     nombreExamen varchar(45),
+     idProfesores int,
+     idCursos int,
+     idAsignaturas int,
+     primary key(idExamenes),
+     foreign key(idProfesores) references Profesores(idProfesores),
+     foreign key(idCursos) references Cursos(idCursos),
+     foreign key(idAsignaturas) references Asignaturas(idAsignaturas));
+Query OK, 0 rows affected (1.22 sec)
+----------------------------------------------------------------------------
+mysql> create table nota(
+    idNota int auto_increment,
+    notas int,
+    idAlumnos int,
+     idExamenes int,
+     primary key(idNota),
+     foreign key(idAlumnos) references Alumnos(idAlumnos),
+     foreign key(idExamenes) references Examenes(idExamenes));
+Query OK, 0 rows affected (0.94 sec)
+-----------------------------------------------------------------------------
+mysql> create table Preguntas(
+     idPreguntas int auto_increment,
+     enunciado varchar(45),
+     idRespuestas int,
+     idExamenes int,
+     primary key(idPreguntas),
+     foreign key(idRespuestas)references Respuestas(idRespuestas),
+     foreign key(idExamenes)references Examenes(idExamenes));
+Query OK, 0 rows affected (0.60 sec)
+
+mysql>		 
+
+
+-----------------------------------------------------------------------------
+
